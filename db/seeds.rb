@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 20.times do
   user = User.find_or_create_by(email: Faker::Internet.safe_email) do |user|
     user.name = Faker::Name.name

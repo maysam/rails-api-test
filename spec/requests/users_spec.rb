@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe 'Users API', type: :request do
@@ -187,8 +185,7 @@ RSpec.describe 'Users API', type: :request do
       context 'when the request is valid' do
         before do
           params = valid_attributes.merge(
-            medical_recommendations_attributes: { '0' => medical_recommendations_attributes }
-          )
+            medical_recommendations_attributes: { '0' => medical_recommendations_attributes })
 
           post '/users', params: params
         end
@@ -210,8 +207,7 @@ RSpec.describe 'Users API', type: :request do
 
         before do
           params = valid_attributes.merge(
-            medical_recommendations_attributes: { '0' => medical_recommendations_attributes }
-          )
+            medical_recommendations_attributes: { '0' => medical_recommendations_attributes })
 
           post '/users', params: params
         end

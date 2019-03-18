@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
   factory :state_id do
     number { Faker::IDNumber.valid }

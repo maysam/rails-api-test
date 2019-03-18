@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 class V1::UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy]
+  before_action :set_user, only: [:show, :update, :destroy]
   before_action :check_expired!, only: :show
 
   def index
@@ -32,10 +30,10 @@ class V1::UsersController < ApplicationController
 
   def user_params
     params.permit(:name, :email, :date_of_birth,
-                  state_id_attributes: %i[id number state expiration_date image remote_image_url _destroy],
-                  medical_recommendations_attributes: %i[
-                    id number issuer state expiration_date image remote_image_url _destroy
-                  ])
+      state_id_attributes: [:id, :number, :state, :expiration_date, :image, :remote_image_url, :_destroy],
+      medical_recommendations_attributes: [
+        :id, :number, :issuer, :state, :expiration_date, :image, :remote_image_url, :_destroy]
+    )
   end
 
   def set_user
@@ -56,7 +54,7 @@ class V1::UsersController < ApplicationController
   def check_medical_recommendation_expired!
     return if @user.medical_recommendations.empty?
     # raise if at least one medical_recommendation is not expired
-    return if @user.medical_recommendations.any? { |mr| !mr.expired? }
+    return if @user.medical_recommendations.any? {|mr| !mr.expired?}
 
     raise Exceptions::MedicalRecommendationExpired, 'Medical Recommendation is expired'
   end

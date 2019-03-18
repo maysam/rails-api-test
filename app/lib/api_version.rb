@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ApiVersion
   attr_reader :version, :default
 
@@ -16,6 +14,6 @@ class ApiVersion
 
   def check_headers(headers)
     accept = headers[:accept]
-    accept&.include?("application/vnd.api.#{version}+json")
+    accept && accept.include?("application/vnd.api.#{version}+json")
   end
 end
