@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   has_one :state_id, dependent: :destroy, inverse_of: :user
   has_many :medical_recommendations, dependent: :destroy, inverse_of: :user
